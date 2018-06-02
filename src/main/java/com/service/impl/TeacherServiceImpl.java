@@ -3,7 +3,7 @@ import java.util.List;
 import com.entity.Teacher;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mapper.master.TeacherMapper;
+import com.mapper.TeacherMapper;
 import com.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
