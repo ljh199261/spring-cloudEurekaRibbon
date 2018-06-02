@@ -1,7 +1,6 @@
 package com.config;
 
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageHelper;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.plugin.Interceptor;
@@ -20,20 +19,20 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@MapperScan(basePackages = "com.mapper",sqlSessionFactoryRef = "sqlSessionFactory")
-public class DataSourceConfig {
-    @Value("${spring.datasource.url}")
+@MapperScan(basePackages = "com.mapper.master",sqlSessionFactoryRef ="masterSqlSessionFactory")
+public class MasterDataSourceConfig {
+    @Value("${spring.master.datasource.url}")
     private String url;
-    @Value("${spring.datasource.username}")
+    @Value("${spring.master.datasource.username}")
     private String username;
-    @Value("${spring.datasource.password}")
+    @Value("${spring.master.datasource.password}")
     private String password;
-    @Value("${spring.datasource.driver-class-name}")
+    @Value("${spring.master.datasource.driver-class-name}")
     private String driverClassName;
 
-    @Bean(name = "dataSource")
+    @Bean(name = "masterDataSource")
     @Primary
-    public DataSource dataSource(){
+    public DataSource masterDataSource(){
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUsername(username);
@@ -50,13 +49,13 @@ public class DataSourceConfig {
     @Bean(name = "transactionManager")
     @Primary
     public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
+        return new DataSourceTransactionManager(masterDataSource());
     }
 
 
-    @Bean(name = "sqlSessionFactory")
+    @Bean(name = "masterSqlSessionFactory")
     @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource)throws
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("masterDataSource") DataSource dataSource)throws
             Exception {
         final SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
@@ -70,12 +69,12 @@ public class DataSourceConfig {
         pageHelper.setProperties(properties);
         sqlSessionFactory.setPlugins(new Interceptor[]{pageHelper});
         sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
-                .getResources("classpath*:mybatis/*.xml"));
+                .getResources("classpath*:mybatis/master/*.xml"));
         return sqlSessionFactory.getObject();
     }
 
 
-  //配置mybatis的分页插件pageHelper
+    //配置mybatis的分页插件pageHelper
 
 //    @Bean
 //    @Primary
@@ -89,7 +88,4 @@ public class DataSourceConfig {
 //        pageHelper.setProperties(properties);
 //        return pageHelper;
 //    }
-
-
-
 }

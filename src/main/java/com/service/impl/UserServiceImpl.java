@@ -3,7 +3,7 @@ import java.util.List;
 import com.entity.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.mapper.UserMapper;
+import com.mapper.master.UserMapper;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
