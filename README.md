@@ -1,1 +1,2 @@
 # spring-cloudEurekaRibbon
+该项目是学习项目，目的是为了用于在工作时间当中使用
