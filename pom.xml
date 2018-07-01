@@ -22,6 +22,7 @@
         <java.version>1.8</java.version>
         <mybatis-spring-boot>1.2.2</mybatis-spring-boot>
         <mysql-connector>5.1.39</mysql-connector>
+        <spring-boot.version>1.2.2.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
@@ -32,6 +33,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -135,6 +143,10 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
     </dependencies>
 
