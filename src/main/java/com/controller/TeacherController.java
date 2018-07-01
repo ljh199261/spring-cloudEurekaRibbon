@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.entity.Teacher;
 import com.github.pagehelper.PageInfo;
 import com.service.TeacherService;
 import io.swagger.annotations.Api;
@@ -11,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/teacher")
-@Api(value = "学生信息",description = "学生信息")
+@Api(value = "测试学生信息",description = "测试学生信息")
 public class TeacherController {
 
 

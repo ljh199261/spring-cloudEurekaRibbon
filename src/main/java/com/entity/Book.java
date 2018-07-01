@@ -1,4 +1,4 @@
-package com;
+package com.entity;
 
 public class Book {
 
