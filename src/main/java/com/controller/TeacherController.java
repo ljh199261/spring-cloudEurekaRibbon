@@ -1,5 +1,7 @@
 package com.controller;
 
+import com.base.BaseController;
+import com.base.ResultResponse;
 import com.github.pagehelper.PageInfo;
 import com.service.TeacherService;
 import io.swagger.annotations.Api;
@@ -12,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "/teacher")
+@RequestMapping(value = "/teacher", produces = "application/json;charset=utf-8")
 @Api(value = "测试学生信息",description = "测试学生信息")
-public class TeacherController {
+public class TeacherController extends BaseController{
 
 
     @Autowired
@@ -23,8 +25,9 @@ public class TeacherController {
     @GetMapping(value = "/selectTeacher")
     @ResponseBody
     @ApiOperation(value = "所有学生信息",notes = "所有学生信息")
-    public PageInfo selectTeacher(){
+    public ResultResponse selectTeacher(){
         PageInfo pageInfo = teacherService.selectTeacher();
-        return pageInfo;
+
+        return getResultResponse("200", pageInfo);
     }
 }

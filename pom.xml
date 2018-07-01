@@ -132,6 +132,10 @@
             <version>1.6</version>
         </dependency>
         <!--swagger2 end-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

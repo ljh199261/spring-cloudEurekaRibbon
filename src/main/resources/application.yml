@@ -27,7 +27,14 @@ spring:
       min-idle: 1
       max-active: 1000
       max-wait: -1
+  auto: # 自动打开配置的浏览器
+      openurl: true # 是否打开浏览器
+  web:
+      loginurl: http://localhost:9090 # 对应的服务名称
+      googleexcute: C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome1.exe
 pagehelper:
   dialect: com.github.pagehelper.dialect.helper.MySqlDialect
+
+
 
 
