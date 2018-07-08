@@ -35,6 +35,11 @@ spring:
 pagehelper:
   dialect: com.github.pagehelper.dialect.helper.MySqlDialect
 
+logging:
+  level: debug
+  path: logs/
+  file: admin.log
+
 
 
 
