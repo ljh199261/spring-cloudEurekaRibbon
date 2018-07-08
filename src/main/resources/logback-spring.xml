@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <!--
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
-    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />-->
+    <appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_PATH}${LOG_FILE}</File>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
         <encoder>
             <pattern>%date [%level] [%thread] %logger{60} [%file : %line] %msg%n</pattern>
         </encoder>
@@ -14,9 +16,33 @@
             <maxHistory>180</maxHistory> <!-- 保留180天 -->
         </rollingPolicy>
     </appender>
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_PATH}${LOG_FILE}</File>
+        <!--根据级别过滤的方式不同-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+             <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%date [%level] [%thread] %logger{60} [%file : %line] %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}daily/${LOG_FILE}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>180</maxHistory> <!-- 保留180天 -->
+        </rollingPolicy>
+    </appender>
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <File>${LOG_PATH}${LOG_FILE}</File>
+        <encoder>
+            <pattern>%d - %msg%n</pattern>
+        </encoder>
+    </appender>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="info"/>
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="error"/>
     </root>
 </configuration>
